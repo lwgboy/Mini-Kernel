@@ -50,7 +50,7 @@
 
 #### 安装教程
 
-1. [详见本项目附件“云操作系统最新内核编译部署V1.0.docx”](https://gitee.com/osgcloud/mini-kernel/attach_files/250645/download)
+1. [详见本项目WIKI](https://github.com/lihangqi/Mini-Kernel/wiki/%E4%BA%91%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%9C%80%E6%96%B0%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%E9%83%A8%E7%BD%B2)
 
 #### 使用说明
 
