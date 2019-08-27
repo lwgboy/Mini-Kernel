@@ -1,0 +1,117 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.gcloud</groupId>
+    <artifactId>gcloud</artifactId>
+    <version>8.0.0</version>
+  </parent>
+  <artifactId>gcloud-boot</artifactId>
+  <dependencies>
+		<!-- SpringBoot WEB支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions><!-- 去掉默认配置 -->  
+            <exclusion>  
+               <groupId>org.springframework.boot</groupId>  
+               <artifactId>spring-boot-starter-logging</artifactId>  
+            </exclusion> 
+	        </exclusions>
+		</dependency>
+		<!-- SpringBoot Tomcat引擎 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+	    <dependency>
+			<!-- hanf add this for jetbrain IDEA -->
+		    <groupId>org.apache.tomcat.embed</groupId>
+		    <artifactId>tomcat-embed-jasper</artifactId>
+	    </dependency>
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-amqp</artifactId>
+	</dependency>
+		<!-- SpringFox API展示及测试/swagger-ui.html -->
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-header</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+	  	<groupId>com.gcloud</groupId>
+	  	<artifactId>gcloud-core</artifactId>
+	  	<version>8.0.0</version>
+	  </dependency>
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-service-api</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-service-controller</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-service-computeNode</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-service-networkNode</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+        <dependency>
+            <groupId>com.gcloud</groupId>
+            <artifactId>gcloud-service-storageNode</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.gcloud</groupId>
+            <artifactId>gcloud-service-imageNode</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+  </dependencies>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<!-- SpringBoot的插件 -->
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+				<!-- maven热部署：spring-boot:run -->
+				<!-- 右键run热部署：-javaagent:D:\springloaded-1.2.6.RELEASE.jar -noverify -->
+				<dependencies>
+					<dependency>
+						<groupId>org.springframework</groupId>
+						<artifactId>springloaded</artifactId>
+						<version>1.2.6.RELEASE</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<version>8.0.0</version>
+	<groupId>com.gcloud</groupId>
+</project>

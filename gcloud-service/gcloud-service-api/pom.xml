@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.gcloud</groupId>
+    <artifactId>gcloud-service</artifactId>
+    <version>8.0.0</version>
+    <relativePath>../pom.xml</relativePath>
+  </parent>
+  <artifactId>gcloud-service-api</artifactId>
+  <dependencies>
+		<!-- SpringBoot WEB支持 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<exclusions><!-- 去掉默认配置 -->  
+            <exclusion>  
+               <groupId>org.springframework.boot</groupId>  
+               <artifactId>spring-boot-starter-logging</artifactId>  
+            </exclusion>
+	        </exclusions>
+		</dependency>
+		<!-- SpringBoot Tomcat引擎 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>	
+	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-amqp</artifactId>
+	</dependency>
+	<dependency>
+		<groupId>com.gcloud</groupId>
+		<artifactId>gcloud-header</artifactId>
+		<version>8.0.0</version>
+	</dependency>
+	<dependency>
+		<groupId>com.gcloud</groupId>
+		<artifactId>gcloud-core</artifactId>
+		<version>8.0.0</version>
+	</dependency>
+	<dependency>
+  		<groupId>com.gcloud</groupId>
+  		<artifactId>gcloud-common</artifactId>
+  		<version>8.0.0</version>
+  	</dependency>
+  	<dependency>
+	    <groupId>org.hibernate.validator</groupId>
+	    <artifactId>hibernate-validator</artifactId>
+	    <version>6.0.8.Final</version>
+	</dependency>
+	<!-- kaptcha验证码 -->
+    <dependency>
+      <groupId>com.github.penggle</groupId>
+      <artifactId>kaptcha</artifactId>
+      <version>2.3.2</version>
+    </dependency>
+    <dependency>
+    <groupId>org.pegdown</groupId>
+    <artifactId>pegdown</artifactId>
+    <version>1.6.0</version>
+</dependency>
+  </dependencies>
+  <groupId>com.gcloud</groupId>
+  <version>8.0.0</version>
+</project>

@@ -1,0 +1,1 @@
+cat /proc/cpuinfo | grep "physical id" | sort | uniq | wc -l

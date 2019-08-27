@@ -1,0 +1,37 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.gcloud</groupId>
+        <artifactId>gcloud-service</artifactId>
+        <version>8.0.0</version>
+    </parent>
+    <artifactId>gcloud-service-computeNode</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gcloud</groupId>
+            <artifactId>gcloud-header</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dom4j</groupId>
+            <artifactId>dom4j</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+		<dependency>
+		    <groupId>jaxen</groupId>
+		    <artifactId>jaxen</artifactId>
+		    <version>1.1.6</version>
+		</dependency>
+        <dependency>
+            <groupId>com.gcloud</groupId>
+            <artifactId>gcloud-service-common</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+    </dependencies>
+    <groupId>com.gcloud</groupId>
+    <version>8.0.0</version>
+</project>

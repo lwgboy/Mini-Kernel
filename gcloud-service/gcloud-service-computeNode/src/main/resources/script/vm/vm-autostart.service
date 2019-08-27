@@ -1,0 +1,12 @@
+[Unit]
+Description=Gcloud Vm Autostart
+After=openstack-glance-agent.service rbdmap.service openstack-cinder-volume.service libvirtd.service
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/bin/vm-autostart start
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

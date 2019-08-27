@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.gcloud</groupId>
+    <artifactId>gcloud</artifactId>
+    <version>8.0.0</version>
+  </parent>
+  <groupId>com.gcloud</groupId>
+    <artifactId>gcloud-core</artifactId>
+    <version>8.0.0</version>
+  <properties>
+  	<quartz.version>2.3.0</quartz.version>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>com.gcloud</groupId>
+  		<artifactId>gcloud-header</artifactId>
+  		<version>8.0.0</version>
+  	</dependency>
+  	<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-amqp</artifactId>
+	</dependency>
+	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+	<!-- 使用mysql，如果使用其他数据库，请替换依赖 -->
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+    </dependency>
+	
+    <!-- orm使用gcloud-framework-db -->
+    <!--  
+    <dependency>
+        <groupId>com.gcloud</groupId>
+        <artifactId>gcloud-framework-db</artifactId>
+        <version>7.3.1</version>
+    </dependency>
+	-->
+    <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        <version>1.0.26</version>
+    </dependency>
+    <!-- 数据库依赖====结束-->
+    <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+	<dependency>
+	    <groupId>com.alibaba</groupId>
+	    <artifactId>fastjson</artifactId>
+	    <version>1.2.7</version>
+	</dependency>
+    <!--quartz相关依赖-->
+    <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz</artifactId>
+        <version>${quartz.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.quartz-scheduler</groupId>
+        <artifactId>quartz-jobs</artifactId>
+        <version>${quartz.version}</version>
+    </dependency>
+    <!--定时任务需要依赖context模块-->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-context-support</artifactId>
+    </dependency>
+    <!--spring cache依赖添加-->
+    <dependency>
+	    <groupId>org.springframework.boot</groupId>
+	    <artifactId>spring-boot-starter-cache</artifactId>
+    </dependency>
+    <!-- 本地缓存 -->
+    <dependency>
+        <groupId>net.sf.ehcache</groupId>
+        <artifactId>ehcache</artifactId>
+    </dependency>
+    <!--redis依赖添加-->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-data-redis</artifactId>
+    </dependency>
+    <!--session redis共享-->
+    <dependency>  
+        <groupId>org.springframework.session</groupId>  
+        <artifactId>spring-session-data-redis</artifactId>  
+	</dependency>
+    <!--lombok-->
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+	<dependency>
+	    <groupId>org.slf4j</groupId>
+	    <artifactId>slf4j-api</artifactId>
+	</dependency>
+    <!-- 引入log4j2依赖 -->
+    <dependency>   
+        <groupId>org.springframework.boot</groupId>  
+        <artifactId>spring-boot-starter-log4j2</artifactId>  
+    </dependency>
+
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>

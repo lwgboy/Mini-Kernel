@@ -1,0 +1,38 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.gcloud</groupId>
+    <artifactId>gcloud</artifactId>
+    <version>8.0.0</version>
+	</parent>
+	<artifactId>gcloud-header</artifactId>
+	<groupId>com.gcloud</groupId>
+	<dependencies>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<dependency>
+			<groupId>org.web3j</groupId>
+			<artifactId>core</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>20.0</version>
+		</dependency>
+		<!-- orm使用gcloud-framework-db -->
+		<dependency>
+			<groupId>com.gcloud</groupId>
+			<artifactId>gcloud-framework-db</artifactId>
+			<version>7.3.1</version>
+			<scope>system</scope>
+			<systemPath>${basedir}/lib/gcloud-framework-db-7.3.1.jar</systemPath>
+		</dependency>
+	</dependencies>
+	<version>8.0.0</version>
+</project>

@@ -1,0 +1,35 @@
+#!/bin/bash
+
+start()
+{
+  /usr/bin/env sh /usr/share/gcloud/network/start-network.sh 
+  /usr/bin/env sh /usr/share/gcloud/network/start-lxc-network.sh 
+  /usr/bin/env sh /usr/share/gcloud/vm/vm_autostart.sh >& /var/log/gcloud/autostart.log
+}
+
+stop()
+{
+  echo "stop"
+}
+
+usage()
+{
+
+  echo "Usage vm-autostart {start|stop|restart}"
+
+}
+
+case "$1" in
+    --help)
+        usage 0
+        ;;
+    start|stop)
+        "$1"
+        ;;
+    restart)
+        stop && start
+        ;;
+    *)
+        usage
+        ;;
+esac

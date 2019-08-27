@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.gcloud</groupId>
+    <artifactId>gcloud</artifactId>
+    <version>8.0.0</version>
+    </parent>
+    <artifactId>gcloud-service</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+
+        <module>gcloud-service-computeNode</module>
+        <module>gcloud-service-controller</module>
+        <module>gcloud-service-api</module>
+        <module>gcloud-service-common</module>
+        <module>gcloud-service-networkNode</module>
+        <module>gcloud-service-storageNode</module>
+    	<module>gcloud-service-imageNode</module>
+  </modules>
+    <groupId>com.gcloud</groupId>
+    <version>8.0.0</version>
+</project>

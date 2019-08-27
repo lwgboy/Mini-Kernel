@@ -1,0 +1,336 @@
+
+##################################################
+#           访问地址：http://localhost/    	         #
+##################################################
+server:
+  port: 80
+  servlet:
+    context-path: /
+#  tomcat:
+#    uri-encoding: UTF-8
+#  session:
+#    timeout:
+
+
+##################################################
+#                 rabbit mq 配置                                                               #
+##################################################
+spring:
+  profiles:
+    active: 
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: RABBIT_PASS
+    listener:
+      simple:
+        acknowledge-mode: manual
+        concurrency: 100
+        max-concurrency: 100
+    template:
+      reply-timeout: 60000
+      
+##################################################
+#              spring mvc 视图解析器                                                 #
+##################################################
+  mvc:
+    view:
+      prefix: /html/		# 跳转到classpath:/static/html目录页面
+      suffix: .html
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/
+    
+  jackson:
+    date-format: MM月dd日 HH:mm
+    time-zone: GMT+8
+    
+
+##################################################
+#                 spring boot热部署                                                #
+##################################################
+  devtools:
+    restart:
+      enabled: true
+      
+##################################################
+#                   缓存配置                                                                           #
+##################################################
+  cache:
+    type: redis # redis ehcache SIMPLE
+##################################################
+#                   本地缓存配置                                                                   #
+##################################################
+    #ehcache:
+      #config: classpath:ehcache.xml    
+   
+##################################################
+#                   redis缓存配置                                                         #
+##################################################
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 5000
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 10
+
+
+  ##################################################
+#                     日志信息                                                                 #
+##################################################
+#logging:
+  #config: classpath:log4j2-spring.xml
+gcloud:
+  service:
+    api: api
+    identity: identity
+    controller: controller-${hostInfo}
+    #identity: identity-${hostInfo}
+    computeNode: compute-${hostInfo}
+    networkNode: network-${hostInfo}
+    storageNode: storage-${hostInfo}
+    imageNode: image-${hostInfo}
+
+##################################################
+#                     schedule配置               #
+##################################################
+  schedule:
+    pool:
+      enable: true
+
+##################################################
+#                     分布式定时器                                                       #
+##################################################  
+
+  quartz:
+    enable: true
+    store-type: ram #默认用内存，如果controller是多节点，请改为db 或者注释
+
+
+##################################################
+#                     redis                                                       #
+##################################################
+
+  redis:
+    enable: true
+
+
+##################################################
+#                    controller组件配置                                              #
+##################################################  
+---
+spring:
+  profiles: controller
+gcloud:
+  datasource:
+    controller:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/gcloud_controller?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: root
+      password: root
+      max-active: 20
+      max-wait: 60000
+      test-on-borrow: true
+      test-while-idle: true
+      primary: true
+  controller:
+    region: regionA
+    vm: #虚拟机配置参数
+      mustRename: true #是否必须重命名
+    novnc:  # noVNC 配置参数
+      tokenDir: /var/log/gcloud/novnc
+      websockifyHost: localhost    # websockify proxy service
+      websockifyPort: 6080
+      noVncHost: localhost         # noVnc service
+      noVncPort: 6070
+    component:
+      storage: cinder
+      network: neutron
+      image: glance
+      slb: neutron
+      monitor: monitor
+    asyncThreadController:
+      #异步操作线程池最大的线程数
+      poolSize: 30
+      #线程空闲时keep alive时间
+      keepAliveTime: 70
+      checkThread:
+        #是否开启线程检查，线程检查用于检查是否有线程执行时间超过设置的timeout时间
+        enable: true
+        #线程检查的频率，单位ms
+        scheduleRate: 300000
+        #中断线程的延迟时间，因为timeout，只是execute的timeout，可能刚接近timeout才完成，在执行execute后的逻辑。为了保护这些逻辑，所以设置延长时间
+        #单位ms
+        interruptedDelay: 300000
+    compute:
+      #ceph磁盘协议，默认：rbd
+      cephDiskProtocol: rbd
+    workflow:
+      #工作流数据过期天数
+      expireDay: 30
+    image:
+      #image存储后端类型 file、rbd
+      stroageType: file
+      filesystemStoreDir: /var/lib/gcloud/images/
+  provider:
+    neutron:
+      url: http://127.0.0.1:9696
+      username: admin
+      password: Lz31rAr7ysSsp3XvujHjArWSPIpq6wZBDpOlyyKk
+      project: admin
+      authUrl: http://127.0.0.1:35357/v3
+    glance:
+      url: http://127.0.0.1:9292
+      username: admin
+      password: 99cloud
+      project: admin
+      authUrl: http://127.0.0.1:35357/v3
+    cinder:
+      url: http://127.0.0.1:8776
+      username: admin
+      password: 99cloud
+      project: admin
+      authUrl: http://127.0.0.1:35357/v3
+    monitor:
+      url: http://127.0.0.1:9090
+##################################################
+#                   region proxy组件配置                                           #
+##################################################
+#---
+#spring:
+#  profiles: zone-proxy
+#gcloud:
+
+##################################################
+#                   api 组件配置                                                         #
+################################################## 
+---
+spring:
+  profiles: api
+gcloud:
+  api:
+    identity:
+      local: true
+      remoteAddress: http://localhost  
+    k8s:
+      url: https://127.0.0.1:6443
+      token: Bearer eyJhbGciOiJSUzI1NiIsImtpZCI6IiJ9.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJrdWJlLXN5c3RlbSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VjcmV0Lm5hbWUiOiJlY2RhdGFhcGktdG9rZW4tN21qd2wiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZWNkYXRhYXBpIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZXJ2aWNlLWFjY291bnQudWlkIjoiNjk2NmIxMjctMWU1Ni0xMWU5LTlkZWEtZmExNjNlM2VjYTllIiwic3ViIjoic3lzdGVtOnNlcnZpY2VhY2NvdW50Omt1YmUtc3lzdGVtOmVjZGF0YWFwaSJ9.Lm3KkMYIa5F_YY22Zj6TY9EV7W1CQaw8sUk1l9KhBepNI0WliGgkvgwLZXgvgnnqNTytBNRFMNz_OqmiZNAJ27OgvqDPCnN75cK9V2jCDmkbX3FZG_shozT3X1odqyzQ4xewF8Uz0qyGDalbPr6idH_YjGhxMV3j2Z-F3Vg12TWsof89wvTOp1HKmkna_LahyOUrFRAXW8wT-t_sUCENFeTibN5z-6eTtAvv78DKe4rfJiaEw0mowq3zpSa0O1gwYoSKz7P6S-0xoMU1Rwzb7UnYxGd7oM7Q781Bk6we_L57HT0e23S-ztZdtL0hxLifmXBN6XLCMQ5RYHQpnF9ZfQ
+    monitor:
+      url: http://127.0.0.1:9090
+      
+  region-proxy:
+    enabled: true
+    regions:
+      regionA:
+        id: regionA
+        name: regionA
+        local: true
+      regionB:
+        id: regionB
+        name: regionB
+        local: false
+        remoteAddress: http://127.0.0.1:8089
+##################################################
+#                   identity组件配置                                                         #
+##################################################      
+---
+spring:
+  profiles: identity
+gcloud:
+  datasource:
+    identity:
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/gcloud_identity?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      username: root
+      password: lPCgWi9dRMbimwQMRDVfvxHWyZtCbMruI7TVZ4WB
+      max-active: 20
+      max-wait: 60000
+      test-on-borrow: true
+      test-while-idle: true
+  identity:
+    user:
+      tokenTimeout: 3600
+      verifyCode: false 
+    api: 
+      check:
+        #是否签名验证
+        signatureCheck: false
+        #api请求时间与 服务器时间差异，单位（分钟）
+        timeout: 5
+      
+
+##################################################
+#                   compute node组件配置                                           #
+##################################################          
+---
+spring:
+  profiles: compute-node
+gcloud:
+  computeNode:
+    #reportFrequency: 30
+    controller: control01
+    maxLocalAverage: 0
+    maxSleepCount: 0
+    vmStartSleepTime: 20
+    configurePath: /usr/share/gcloud
+    vmStartMaxNum: 5
+    nodeIp: 127.0.0.1
+    #虚拟化实现，默认:kvm
+    hypervisor: kvm
+    #普通虚拟机cpu socket,core,thread配置 默认 *,1,1
+    vmCpuTopologyConfig: "*,1,1"
+    #桌面有虚拟机cpu socket,core,thread配置 默认 1,*,1
+    #desktopVmCpuTopologyConfig: "1,*,1"
+    #桌面云配置文件存放路径
+    #deskTopCfgPath: /usr/etc/qemu
+    #桌面云配置文件模板名称
+    #deskTopCfgTemplate: lci_5900.cfg
+    #agent类型 qemu-guest-agent/vmagent，默认:qemu-guest-agent
+    agentType: qemu-guest-agent
+    #远程连接密码，如果为空，则不设置，如果设为RD为随机密码
+    #graphicsPassword:
+    #QEMU的路径，默认本机安装的kvm版本路径
+    #qemuPath: /usr/mc/qemu-mc/x86_64-softmmu/qemu-system-x86_64
+    #磁盘缓存类型（系统盘，数据盘和云盘统一配置），如果没有配置，则没有cache选项，缓存类型：none,writethrough,writeback,unsafe 这四种类型
+    fileDiskCacheType: none
+    rbdDiskCacheType:
+    lvmDiskCacheType: none
+    #libvirt对rbd授权信息
+    rbdUserName: cinder
+    rbdSecretUuid: dff4d80c-c756-4bfa-9b15-01a43b00f79d
+    #zxAuthPath: /usr/share/zxAuth/image.raw
+    
+    
+##################################################
+#                   storage node组件配置                                           #
+##################################################          
+---
+spring:
+  profiles: storage-node
+gcloud:
+  storage-node:
+    controller: control01
+    reportPools: true
+    cachedImagesPath: /opt/gcloud/storage/imageCaches/
+    pools[0]:
+      provider: 0
+      storageType: file
+      poolName: /opt/gcloud/storage
+      categoryCode: gcloud_local
+      snapshotType: internal
+
+##################################################
+#                   image node组件配置                                           #
+##################################################          
+---
+spring:
+  profiles: image-node
+gcloud:
+  image-node:
+    controller: control01
+    #imageCachedPath: /var/lib/gcloud/caches/images/
+    imageCachedPath: /opt/gcloud/storage/imageCaches/
