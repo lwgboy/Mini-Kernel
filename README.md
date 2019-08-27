@@ -1,3 +1,5 @@
+中文 | [English](https://github.com/lihangqi/Mini-Kernel/blob/master/README.en.md)
+
 # 中国云OS最小内核
 
 #### 介绍
