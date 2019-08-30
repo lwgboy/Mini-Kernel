@@ -64,7 +64,7 @@ function getKeysym(e) {
     }
     
     /* Remap shifted and unshifted keys */
-    if (!!evt.shiftKey) {
+    if (evt.shiftKey) {
         switch (keysym) {
             case 48        : keysym = 41 ; break; // )  (shifted 0)
             case 49        : keysym = 33 ; break; // !  (shifted 1)
