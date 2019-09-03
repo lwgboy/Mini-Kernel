@@ -68,12 +68,22 @@
 
  **项目下载和运行** 
 1. 拉取项目代码
-直接下载本项目，或者远程拉取git clone http://113.105.131.176:29780/gcloud/g-cloud-8.0.git
-cd g-cloud-8.0/gcloud
+直接下载本项目，或者远程拉取
+
+`git clone http://113.105.131.176:29780/gcloud/g-cloud-8.0.git`
+
+`cd g-cloud-8.0/gcloud`
+
 2. 编译
-mvn clean;mvn package;
+
+`mvn clean;mvn package;`
+
 3. 运行
-cd  gcloud/gcloud-boot/target/
-nohup java -jar gcloud-boot-8.0.jar &
+
+`cd  gcloud/gcloud-boot/target/`
+
+`nohup java -jar gcloud-boot-8.0.jar &`
+
 4. 接口测试（以获取vpc列表为例）
-curl -i -X POST -H "X-Auth-Token: 4723ad1b-5190-3fc0-8c1b-96581dda3841" http://127.0.0.1:8089/ecs/DescribeVpcs.do
+
+`curl -i -X POST -H "X-Auth-Token: 4723ad1b-5190-3fc0-8c1b-96581dda3841" http://127.0.0.1:8089/ecs/DescribeVpcs.do`
